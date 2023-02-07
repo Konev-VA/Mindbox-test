@@ -9,10 +9,15 @@
         public double Radius
         {
             get { return _radius; }
+            //Возможность изменения радиуса находится под вопросом,
+            //но в силу отсутсвия контекста, она была реализована
             set
             {
-                _radius = ValidateNewRadius(value);
                 _area = GetArea(value);
+                //Была убрана отдельная проверка радиуса, т.к. она осуществлена при установке площади,
+                //следовательно, при неверном радиусе выполнение программы
+                //прервётся на предыдущем шаге
+                _radius = value;
             }
 
         }
@@ -24,21 +29,12 @@
 
         public Circle(double radius) => Radius = radius;
 
-        //Допущено дублирование кода, но это позволяет пользователю без нужды не создавать обьект Circle, а просто обращаться к статичному методу, передавая радиус
         public static double GetArea(double radius)
         {
             if (!RadiusIsValid(radius))
                 throw new Exception("A circle with such a radius cannot exist.");
 
             return Math.Round((Math.PI * Math.Pow(radius, 2)), 2);
-        }
-
-        private double ValidateNewRadius(double newRadius)
-        {
-            if (!RadiusIsValid(newRadius))
-                throw new Exception("A circle with such a radius cannot exist.");
-
-            return newRadius;
         }
 
         private static bool RadiusIsValid(double radius)

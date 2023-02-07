@@ -75,7 +75,8 @@
 
         private bool IsRigthTriangle(double a, double b, double c)
         {
-            //Проверка трегольника на наличие прямого угла осуществляется при помощи Теоремы Пифагора
+            //Проверка трегольника на наличие прямого угла
+            //осуществляется при помощи Теоремы Пифагора
             var trianglesides = new List<double> { a, b, c };
             double largestSide = trianglesides.Max();
 
@@ -93,7 +94,8 @@
 
         private bool CanExist(double a, double b, double c)
         {
-            //Трегольники существуют только тогда, когда каждая сторона меньше суммы двух других
+            //Трегольники существуют только тогда,
+            //когда каждая сторона меньше суммы двух других
             if (a >= b + c)
                 return false;
             if (b >= c + a)
