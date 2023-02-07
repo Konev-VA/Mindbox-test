@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
-
-namespace GeometryCalculator.Models
+﻿namespace GeometryCalculator.Models
 {
     public class Triangle
     {
+        #region Properties
         public double A { get; init; }
 
         public double B { get; init; }
@@ -18,6 +12,8 @@ namespace GeometryCalculator.Models
         public double Area { get; init; }
 
         public TriangleType Type { get; init; }
+
+        #endregion
 
         public Triangle(double a, double b, double c)
         {
@@ -33,6 +29,8 @@ namespace GeometryCalculator.Models
             Area = Math.Round(GetArea(), 2);
         }
 
+        #region GetAreaMethods
+
         private double GetArea()
         {
             switch (Type)
@@ -47,6 +45,7 @@ namespace GeometryCalculator.Models
 
         private double GetRightTriangleArea()
         {
+            //Площадь прямоугольного треугольника рассчитывается, как половина произведения катетов
             List<double> sides = new List<double> { A, B, C };
 
             sides.Remove(sides.Max());
@@ -57,10 +56,13 @@ namespace GeometryCalculator.Models
 
         private double GetUndefinedTriangleArea()
         {
+            //Площадь любого треугольника рассчитывается по формуле Герона
             double p = (A + B + C) / 2; //Не лучший нейминг, однако p является общепринятым обозначением для полупериметра
 
             return Math.Sqrt(p * (p - A) * (p - B) * (p - C));
         }
+
+        #endregion
 
         private TriangleType GetTriangleType(double a, double b, double c)
         {
@@ -73,6 +75,7 @@ namespace GeometryCalculator.Models
 
         private bool IsRigthTriangle(double a, double b, double c)
         {
+            //Проверка трегольника на наличие прямого угла осуществляется при помощи Теоремы Пифагора
             var trianglesides = new List<double> { a, b, c };
             double largestSide = trianglesides.Max();
 
@@ -90,6 +93,7 @@ namespace GeometryCalculator.Models
 
         private bool CanExist(double a, double b, double c)
         {
+            //Трегольники существуют только тогда, когда каждая сторона меньше суммы двух других
             if (a >= b + c)
                 return false;
             if (b >= c + a)

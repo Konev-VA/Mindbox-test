@@ -2,6 +2,9 @@
 {
     public class Circle
     {
+
+        #region Properties
+
         private double _radius;
         public double Radius
         {
@@ -16,6 +19,8 @@
 
         private double _area;
         public double Area { get => _area; }
+
+        #endregion
 
         public Circle(double radius) => Radius = radius;
 
