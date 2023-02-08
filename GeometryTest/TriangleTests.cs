@@ -31,5 +31,23 @@ namespace GeometryTest
             Assert.ThrowsException<Exception>(() => new Triangle(2, 1, 1));
         }
 
+        [TestMethod]
+        public void GetExceptionWhenTriangleDoesntExistWithOneNegativeSide()
+        {
+            Assert.ThrowsException<Exception>(() => new Triangle(-3, 4, 5));
+        }
+
+        [TestMethod]
+        public void GetExceptionWhenTriangleDoesntExistWithTwoNegativeSides()
+        {
+            Assert.ThrowsException<Exception>(() => new Triangle(-3, -4, 5));
+        }
+
+        [TestMethod]
+        public void GetExceptionWhenTriangleDoesntExistWithThreeNegativeSide()
+        {
+            Assert.ThrowsException<Exception>(() => new Triangle(-3, -4, -5));
+        }
+
     }
 }
